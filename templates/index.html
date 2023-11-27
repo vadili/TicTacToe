@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+    <div class="ui center aligned grid" style="margin-top:80px;">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="ui basic center aligned segment" style="margin-top:20px">
+                    {% for msg in messages%}
+                        <h4 class="ui red header">{{msg}}</h4>
+                    {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        {% for i in range(3) %}
+            <div class="row">
+                {% for j in range(3) %}
+                    <div class="column">
+                        <a href="{{ url_for('move', x=i, y=j) }}">
+                            <button class="large ui primary basic button">
+                                {{map[board[i][j]]}}
+                            </button>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <div class="column">
+            <a href="{{ url_for('reset') }}">
+                <button class="medium ui primary basic button">
+                    Reset
+                </button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
